@@ -7,9 +7,13 @@
 
     <img alt="Vue logo" src="./assets/logo.png" />
 
-    <div v-for="product in products" :key="product.id">
+    <div v-for="(product, index) in products" :key="product.id">
         <h4>{{ product.title }}</h4>
         <p>{{ product.price }} 만원</p>
+        <button type="button" class="report_btn" @click="increase(e, index)">
+            허위매물신고
+        </button>
+        <span class="report_number">신고수 : {{ product.reportNumber }}</span>
     </div>
 </template>
 
@@ -23,17 +27,25 @@ export default {
                 {
                     title: "역삼동 원룸",
                     price: 50,
+                    reportNumber: 0,
                 },
                 {
                     title: "천호동 원룸",
                     price: 30,
+                    reportNumber: 0,
                 },
                 {
                     title: "마포구 원룸",
                     price: 60,
+                    reportNumber: 0,
                 },
             ],
         };
+    },
+    methods: {
+        increase(e, number) {
+            this.products[number].reportNumber++;
+        },
     },
     components: {},
 };
@@ -62,5 +74,17 @@ export default {
     color: #fff;
     padding: 10px;
     text-decoration: none;
+}
+
+.report_btn {
+    background: #6750ec;
+    color: #fff;
+    border: 0;
+    padding: 5px;
+    border-radius: 6px;
+}
+
+.report_number {
+    margin-left: 10px;
 }
 </style>
