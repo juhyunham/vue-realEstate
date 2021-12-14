@@ -5,41 +5,52 @@
         </li>
     </ul>
 
-    <img alt="Vue logo" src="./assets/logo.png" />
-
     <div v-for="(product, index) in products" :key="product.id">
-        <h4>{{ product.title }}</h4>
-        <p>{{ product.price }} 만원</p>
+        <img
+            :src="require(`@/assets/${product.image}`)"
+            class="room-img"
+            alt="룸 이미지"
+        />
+        <h4 @click="modalOpen = true" class="product_title">
+            {{ product.title }}
+        </h4>
+        <p class="product_price">{{ product.price }} 만원</p>
         <button type="button" class="report_btn" @click="increase(e, index)">
             허위매물신고
         </button>
         <span class="report_number">신고수 : {{ product.reportNumber }}</span>
     </div>
+
+    <div class="modal_wrap" v-if="modalOpen === true">
+        <div class="modal_box">
+            <div class="modal_header">
+                <h4 class="modal_title">모달창 페이지임</h4>
+                <button
+                    type="button"
+                    class="close_btn"
+                    @click="modalOpen = false"
+                >
+                    닫기
+                </button>
+            </div>
+            <div class="modal_content">
+                <p>모달창 내용임</p>
+            </div>
+        </div>
+        <div class="modal_bg" @click="modalOpen = false"></div>
+    </div>
 </template>
 
 <script>
+import oneroomData from "./assets/room.js";
+
 export default {
     name: "App",
     data() {
         return {
             menu: ["Home", "Products", "About"],
-            products: [
-                {
-                    title: "역삼동 원룸",
-                    price: 50,
-                    reportNumber: 0,
-                },
-                {
-                    title: "천호동 원룸",
-                    price: 30,
-                    reportNumber: 0,
-                },
-                {
-                    title: "마포구 원룸",
-                    price: 60,
-                    reportNumber: 0,
-                },
-            ],
+            products: oneroomData,
+            modalOpen: false,
         };
     },
     methods: {
@@ -52,13 +63,17 @@ export default {
 </script>
 
 <style>
+* {
+    margin: 0;
+    padding: 0;
+}
+
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
 }
 
 .menu {
@@ -76,6 +91,14 @@ export default {
     text-decoration: none;
 }
 
+.product_title {
+    margin-bottom: 10px;
+}
+
+.product_price {
+    margin-bottom: 10px;
+}
+
 .report_btn {
     background: #6750ec;
     color: #fff;
@@ -86,5 +109,51 @@ export default {
 
 .report_number {
     margin-left: 10px;
+}
+
+.room-img {
+    width: 100%;
+    margin-top: 40px;
+}
+
+.modal_wrap {
+    overflow: hidden;
+}
+
+.modal_box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 20px;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border-radius: 14px;
+    z-index: 1;
+}
+
+.modal_box .modal_header {
+    position: relative;
+    display: flex;
+    padding-right: 50px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #333;
+}
+
+.modal_box .modal_header .close_btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.modal_wrap .modal_bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
 }
 </style>
