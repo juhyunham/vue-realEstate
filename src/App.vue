@@ -14,6 +14,7 @@
         <h4 @click="modalOpen = true" class="product_title">
             {{ product.title }}
         </h4>
+        <p class="product_content">{{ product.content }}</p>
         <p class="product_price">{{ product.price }} 만원</p>
         <button type="button" class="report_btn" @click="increase(e, index)">
             허위매물신고
@@ -93,6 +94,10 @@ export default {
 
 .product_title {
     margin-bottom: 10px;
+}
+
+.product_content {
+    margin-top: 10px;
 }
 
 .product_price {
