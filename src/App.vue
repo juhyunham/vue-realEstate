@@ -11,7 +11,13 @@
             class="room-img"
             alt="룸 이미지"
         />
-        <h4 @click="modalOpen = true" class="product_title">
+        <h4
+            @click="
+                modalOpen = true;
+                number_modalClick = index;
+            "
+            class="product_title"
+        >
             {{ product.title }}
         </h4>
         <p class="product_content">{{ product.content }}</p>
@@ -25,7 +31,9 @@
     <div class="modal_wrap" v-if="modalOpen === true">
         <div class="modal_box">
             <div class="modal_header">
-                <h4 class="modal_title">모달창 페이지임</h4>
+                <h4 class="modal_title">
+                    {{ products[number_modalClick].title }}
+                </h4>
                 <button
                     type="button"
                     class="close_btn"
@@ -35,7 +43,16 @@
                 </button>
             </div>
             <div class="modal_content">
-                <p>모달창 내용임</p>
+                <img
+                    :src="
+                        require(`@/assets/${products[number_modalClick].image}`)
+                    "
+                    class="modal_cont_img"
+                    alt="룸 이미지"
+                />
+                <p class="modal_cont_info">
+                    {{ products[number_modalClick].content }}
+                </p>
             </div>
         </div>
         <div class="modal_bg" @click="modalOpen = false"></div>
@@ -49,6 +66,7 @@ export default {
     name: "App",
     data() {
         return {
+            number_modalClick: 0,
             menu: ["Home", "Products", "About"],
             products: oneroomData,
             modalOpen: false,
@@ -93,11 +111,12 @@ export default {
 }
 
 .product_title {
+    font-size: 20px;
     margin-bottom: 10px;
 }
 
 .product_content {
-    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .product_price {
@@ -118,7 +137,7 @@ export default {
 
 .room-img {
     width: 100%;
-    margin-top: 40px;
+    margin: 40px 0 30px;
 }
 
 .modal_wrap {
@@ -126,7 +145,7 @@ export default {
 }
 
 .modal_box {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     padding: 20px;
@@ -145,10 +164,48 @@ export default {
     border-bottom: 1px solid #333;
 }
 
+.modal_box .modal_title {
+    word-break: break-word;
+    text-align: left;
+    font-size: 20px;
+}
+
 .modal_box .modal_header .close_btn {
     position: absolute;
-    top: 0;
+    top: -10px;
     right: 0;
+    width: 30px;
+    height: 30px;
+    background: transparent;
+    border: 0;
+    text-indent: -9999px;
+}
+
+.modal_box .modal_header .close_btn:before,
+.modal_box .modal_header .close_btn:after {
+    content: "";
+    position: absolute;
+    left: 15px;
+    height: 30px;
+    width: 2px;
+    background-color: #000;
+}
+
+.modal_box .modal_header .close_btn:before {
+    transform: rotate(45deg);
+}
+
+.modal_box .modal_header .close_btn:after {
+    transform: rotate(-45deg);
+}
+
+.modal_box .modal_content .modal_cont_img {
+    width: 100%;
+}
+
+.modal_box .modal_content .modal_cont_info {
+    font-size: 15px;
+    text-align: left;
 }
 
 .modal_wrap .modal_bg {
