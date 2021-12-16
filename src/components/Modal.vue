@@ -46,6 +46,13 @@ export default {
             month: 1,
         };
     },
+    watch: {
+        month(number) {
+            if (number >= 13) {
+                alert(`12개월까지만 됩니다.`);
+            }
+        },
+    },
     props: {
         products: Array,
         number_modalClick: Number,
