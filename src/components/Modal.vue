@@ -24,6 +24,18 @@
                 <p class="modal_cont_info">
                     {{ products[number_modalClick].content }}
                 </p>
+                <div class="modal_input_box">
+                    <input
+                        @input="month = $event.target.value"
+                        class="modal_input"
+                        type="number"
+                    />
+                    개월
+                </div>
+                <p class="modal_price">
+                    {{ month }} 개월 선택함:
+                    {{ products[number_modalClick].price * month }}
+                </p>
             </div>
         </div>
         <div class="modal_bg" @click="$emit('closeModal')"></div>
@@ -33,13 +45,15 @@
 <script>
 export default {
     name: "Modal",
+    data() {
+        return {
+            month: 1,
+        };
+    },
     props: {
         products: Array,
         number_modalClick: Number,
         modalOpen: Boolean,
-    },
-    data() {
-        return {};
     },
 };
 </script>
@@ -122,5 +136,21 @@ export default {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.3);
+}
+
+.modal_box .modal_content .modal_input_box {
+    display: flex;
+    margin-top: 10px;
+    white-space: nowrap;
+}
+
+.modal_box .modal_content .modal_input {
+    padding-left: 10px;
+    margin-right: 10px;
+    border: 1px solid #333;
+}
+
+.modal_box .modal_content .modal_price {
+    margin-top: 10px;
 }
 </style>
