@@ -25,11 +25,7 @@
                     {{ products[number_modalClick].content }}
                 </p>
                 <div class="modal_input_box">
-                    <input
-                        @input="month = $event.target.value"
-                        class="modal_input"
-                        type="number"
-                    />
+                    <input v-model="month" class="modal_input" type="number" />
                     개월
                 </div>
                 <p class="modal_price">
