@@ -58,6 +58,7 @@ export default {
     border: 0;
     padding: 5px;
     border-radius: 6px;
+    cursor: pointer;
 }
 
 .report_number {

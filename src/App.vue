@@ -7,6 +7,10 @@
 
     <Discount />
 
+    <div class="sort_btn">
+        <button @click="priceSort">가격 순 정렬</button>
+    </div>
+
     <Card
         @openModal="
             modalOpen = true;
@@ -45,6 +49,11 @@ export default {
         increase(e, number) {
             this.products[number].reportNumber++;
         },
+        priceSort() {
+            this.products.sort((a, b) => {
+                return a.price - b.price;
+            });
+        },
     },
     components: {
         Discount: Discount,
@@ -81,5 +90,20 @@ export default {
     color: #fff;
     padding: 10px;
     text-decoration: none;
+}
+
+.sort_btn {
+    text-align: right;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.sort_btn button {
+    border: 1px solid #fff;
+    border-radius: 10px;
+    background-color: #df6fec;
+    padding: 10px;
+    color: #fff;
+    cursor: pointer;
 }
 </style>

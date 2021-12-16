@@ -145,6 +145,7 @@ export default {
     display: flex;
     margin-top: 10px;
     white-space: nowrap;
+    justify-content: center;
 }
 
 .modal_box .modal_content .modal_input {
