@@ -5,13 +5,13 @@
                 <h4 class="modal_title">
                     {{ products[number_modalClick].title }}
                 </h4>
-                <!-- <button
+                <button
                     type="button"
                     class="close_btn"
-                    @click="modalOpen = false"
+                    @click="$emit('closeModal')"
                 >
                     닫기
-                </button> -->
+                </button>
             </div>
             <div class="modal_content">
                 <img
@@ -26,7 +26,7 @@
                 </p>
             </div>
         </div>
-        <div class="modal_bg"></div>
+        <div class="modal_bg" @click="$emit('closeModal')"></div>
     </div>
 </template>
 

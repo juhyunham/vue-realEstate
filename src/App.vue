@@ -18,6 +18,7 @@
     />
 
     <Modal
+        @closeModal="modalOpen = false"
         :products="products"
         :number_modalClick="number_modalClick"
         :modalOpen="modalOpen"

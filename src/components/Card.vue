@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="card">
         <img
             :src="require(`@/assets/${product.image}`)"
             class="room-img"
@@ -26,11 +26,19 @@ export default {
     props: {
         product: Object,
     },
-    methods: {},
+    methods: {
+        increase(e, number) {
+            this.products[number].reportNumber++;
+        },
+    },
 };
 </script>
 
 <style>
+.card {
+    margin-bottom: 30px;
+}
+
 .product_title {
     font-size: 20px;
     margin-bottom: 10px;
@@ -58,6 +66,5 @@ export default {
 
 .room-img {
     width: 100%;
-    margin: 40px 0 30px;
 }
 </style>

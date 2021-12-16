@@ -12,7 +12,7 @@ export default {
 
 <style>
 .discount {
-    margin-top: 10px;
+    margin: 10px 0;
     padding: 10px 0;
     background-color: #f9db97;
     color: #333;
